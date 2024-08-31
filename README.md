@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `firewall-frag.nse` script is a custom Nmap Scripting Engine (NSE) script designed to test firewall evasion techniques by sending fragmented and obfuscated packets. It aims to evaluate how well a firewall handles fragmented traffic and non-standard data patterns.
+`firewall-frag.nse` is a custom Nmap Scripting Engine (NSE) script designed to test firewall evasion techniques by sending fragmented and obfuscated packets. It aims to evaluate how well a firewall handles fragmented traffic and non-standard data patterns.
 
 ## Features
 
