@@ -1,32 +1,33 @@
-### firewall-frag.nse
+### `firewall-frag.nse`
 
 ## Overview
 
-The `firewall-frag.nse` script is a custom Nmap Scripting Engine (NSE) script designed to test firewall evasion techniques by sending fragmented and obfuscated packets.
+The `firewall-frag.nse` script is a custom Nmap Scripting Engine (NSE) script designed to test firewall evasion techniques by sending fragmented and obfuscated packets. It aims to evaluate how well a firewall handles fragmented traffic and non-standard data patterns.
 
 ## Features
 
-- **Packet Fragmentation**: Sends fragmented packets to the target to test firewall handling of packet reassembly.
-- **Random Data Injection**: Appends random data with a random length to the end of packets to test if the firewall can handle non-standard data patterns.
-- **Customizable Parameters**: Allows specification of the length of random data to include in packets.
+- **Packet Fragmentation**: Sends fragmented IP packets to the target to assess the firewall’s handling of packet reassembly.
+- **Random Data Injection**: Appends random data with a length that can vary up to a specified maximum, allowing for the testing of firewall robustness against obfuscated data.
+- **Customizable Parameters**: Allows you to specify the maximum length of the random data to include in the packets, offering flexibility for different testing scenarios.
 
 ## Usage
 
 To use this script, place it in Nmap's scripts directory and run it with Nmap using the following command:
 
 ```sh
-nmap --script firewall-frag -p <port> <target>
+nmap --script firewall-frag --script-args random_data_length=<length> -p <port> <target>
 ```
 
 ### Parameters
 
 - **`<port>`**: The port number you want to test. Replace `<port>` with the actual port number (e.g., `80` for HTTP).
 - **`<target>`**: The IP address or hostname of the target machine. Replace `<target>` with the actual IP address or hostname (e.g., `192.168.1.1`).
+- **`random_data_length`**: Optional argument specifying the maximum length of random data to append to the packet payload. The value should be a positive integer. Default is `1024` if not provided.
 
 ### Example Command
 
 ```sh
-nmap --script firewall-frag -p 80 192.168.1.1
+nmap --script firewall-frag --script-args random_data_length=512 -p 80 192.168.1.1
 ```
 
 ## Script Location
@@ -43,7 +44,7 @@ nmap --script firewall-frag -p 80 192.168.1.1
 ## Notes
 
 - This script is intended for use in controlled environments for security testing purposes. Do not use it on networks or systems without proper authorization.
-- The script may occasionally generate network traffic that could be detected by monitoring systems or affect network performance (ex: on modern firewall / IDS solutions).
+- The script may occasionally generate network traffic that could be detected by monitoring systems or affect network performance, particularly on modern firewalls or intrusion detection systems.
 
 ## License
 
