@@ -15,19 +15,19 @@
 To use this script, place it in Nmap's scripts directory and run it with Nmap using the following command:
 
 ```sh
-nmap --script firewall-frag --script-args random_data_length=<length> -p <port> <target>
+nmap --script firewall-frag --script-args rdl=<length> -p <port> <target>
 ```
 
 ### Parameters
 
 - **`<port>`**: The port number you want to test. Replace `<port>` with the actual port number (e.g., `80` for HTTP).
 - **`<target>`**: The IP address or hostname of the target machine. Replace `<target>` with the actual IP address or hostname (e.g., `192.168.1.1`).
-- **`random_data_length`**: Optional argument specifying the maximum length of random data to append to the packet payload. The value should be a positive integer. Default is `1024` if not provided.
+- **`rdl`**: Optional argument specifying the maximum length of random data to append to the packet payload. The value should be a positive integer. Default is `1024` if not provided.
 
 ### Example Command
 
 ```sh
-nmap --script firewall-frag --script-args random_data_length=512 -p 80 192.168.1.1
+nmap --script firewall-frag --script-args rdl=512 -p 80 192.168.1.1
 ```
 
 ## Script Location
