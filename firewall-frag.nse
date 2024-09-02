@@ -23,7 +23,7 @@ categories = {"stealth", "discovery", "firewall-bypass"}
 
 portrule = shortport.port_or_service({80, 443}, "http")
 
--- generate random data with a random length between 0 and a specified maximum
+-- generate random data with a random length between 0 and a specified maximum 
 local function random_data(max_length)
   local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~"
   local random_length = math.random(0, max_length) -- random length between 0 and max_length (1024 by default)
@@ -82,7 +82,7 @@ local function send_fragmented_packets(host, port, max_random_data_length)
     ip_packet.payload = fragment
 
     -- randomize TTL to avoid pattern detection
-    ip_packet.ip_ttl = math.random(64, 128)  -- Mimic typical TTL ranges
+    ip_packet.ip_ttl = math.random(64, 128)  -- mimic typical TTL ranges
 
     local raw_ip_packet = ip_packet:build()
     socket:ip_send(raw_ip_packet)
@@ -96,7 +96,7 @@ local function send_fragmented_packets(host, port, max_random_data_length)
   socket:close()
 end
 
--- option to specify maximum random data length via command line argument
+-- option to specify maximum random data length via command line argument (random_data_length)
 action = function(host, port)
   -- read maximum random data length from script arguments, default to 1024 if not provided
   local max_random_data_length = tonumber(nmap.registry.args.random_data_length) or 1024
