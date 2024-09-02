@@ -1,7 +1,7 @@
 --[[ 
   @description This script sends fragmented IP packets to a target with stealth techniques applied, 
   such as random fragment sizes and delays, to evade firewalls that may not correctly handle fragmented and obfuscated traffic.
-  @usage nmap --script firewall-frag --script-args random_data_length=<length> -p <port> <target>
+  @usage nmap --script firewall-frag --script-args rdl=<length> -p <port> <target>
   @categories stealth, discovery, firewall-bypass
 --]]
 
@@ -76,7 +76,7 @@ local function send_fragmented_packets(host, port, max_random_data_length)
     local ip_packet = packet.Packet:new()
     ip_packet.ip_bin_src = ipOps.ip_to_bin(ip_src)
     ip_packet.ip_bin_dst = ipOps.ip_to_bin(ip_dst)
-    ip_packet.ip_offset = (frag_index - 1) * min_frag_size / 8 -- Calculate offset based on minimum fragment size
+    ip_packet.ip_offset = (frag_index - 1) * min_frag_size / 8 -- calculate offset based on minimum fragment size
     ip_packet.ip_more_fragments = frag_index ~= #fragments
     ip_packet.ip_proto = proto
     ip_packet.payload = fragment
@@ -96,10 +96,10 @@ local function send_fragmented_packets(host, port, max_random_data_length)
   socket:close()
 end
 
--- option to specify maximum random data length via command line argument (random_data_length)
+-- option to specify maximum random data length via command line argument (rdl)
 action = function(host, port)
   -- read maximum random data length from script arguments, default to 1024 if not provided
-  local max_random_data_length = tonumber(nmap.registry.args.random_data_length) or 1024
+  local max_random_data_length = tonumber(nmap.registry.args.rdl) or 1024
 
   stdnse.print_debug(1, "Starting firewall-frag against %s:%d with data length %d", host.ip, port.number, max_random_data_length)
   
